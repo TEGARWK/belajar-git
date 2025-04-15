@@ -2,7 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   deploy:
@@ -19,20 +19,16 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 64000
           script: |
-            if [ ! -d "/var/www/html/cicd" ]; then
-              mkdir -p /var/www/html/cicd
+            if [ ! -d "/var/www/html/2305053" ]; then
+              mkdir -p /var/www/html/2305053
             fi
 
-            if [ ! -d "/var/www/html/cicd/2305053" ]; then
-              mkdir -p /var/www/html/cicd/2305053
-            fi
-
-            cd /var/www/html/cicd/2305053
+            cd /var/www/html/2305053
 
             if [ ! -d ".git" ]; then
               git clone https://github.com/${{ github.repository }}.git .
             else
-              git pull origin main
+              git pull origin master
             fi
 
-            chmod -R 755 /var/www/html/cicd
+            chmod -R 755 /var/www/html/2305053
